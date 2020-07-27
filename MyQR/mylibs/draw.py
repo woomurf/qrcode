@@ -15,9 +15,9 @@ def draw_qrcode(abspath, qrmatrix):
             x += unit_len
         x, y = 4*unit_len, y+unit_len
 
-    saving = os.path.join(abspath, 'qrcode.png')
-    pic.save(saving)
-    return saving
+    # saving = os.path.join(abspath, 'qrcode.png')
+    # pic.save(saving)
+    return pic
     
 def draw_a_black_unit(p, x, y, ul):
     for i in range(ul):
