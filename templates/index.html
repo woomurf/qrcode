@@ -1,0 +1,89 @@
+<HTML>
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+        <!-- Project Title! -->
+        <title>Title</title>    
+    </head>
+    <body>
+        <div class = "container">
+            <div class="jumbotron mt-3">
+                 <!-- Proejct Title -->
+                <h1>Project Title</h1>
+                <!-- Github link and Ainize link -->
+                <A>Git Hub repository : </A> <A href=""> </A>
+                <br>
+                <A>Testing API : </A> <A href=""> on Ainize </A>
+
+                <hr class="solid">
+                
+                <!-- If your project have a input files -->
+                <h2>Upload </h2>
+                <div id = 'inputImage'>
+                    <label> url : </label>
+                    <input type = "text" id="url" style="width:40%"></input><br>
+                    <label for="label1">Image or Gif : </label>
+                    <input type = 'file' id = 'input1' style="margin-right: 10px; margin-bottom: 10px;">
+                    <button id = "submit" type='submit' class="btn btn-primary btn-lg" style="margin-left: auto;"> submit </button>
+                </div>
+                
+                <!-- Result Box -->
+                <div id ='resultBox' style="margin-left: auto; margin-right: auto;">
+                    <p id='errorbox'></p>
+                    <img id='resultImage' src="" alt="">
+                </div>
+
+                <!-- onclick function if you want you can delete this -->
+                <script>
+                    document.getElementById("submit").onclick = () => {
+                        var url = document.getElementById("url")
+                        var imagefile = document.getElementById("input1").files[0]
+                        
+                        var formData = new FormData();
+                        formData.append("url", url);
+                        formData.append("image", imagefile);
+
+                        fetch(
+                            "/qr",
+                            {
+                                method: "POST",
+                                body: formData
+                            }
+                        )
+                        .then(response =>{
+                            if(response.status == 200){
+                                return response
+                            }
+                            else{
+                                throw Error(response)
+                            }
+                        })
+                        .then(response => response.text())
+                        .then(response => {
+                            console.log(response);
+                            return response;
+                            
+                        })
+                        .then(response => btoa(response))
+                        .then(imageURL =>{
+                            document.getElementById("resultImage").src = imageURL;
+                            document.getElementById("errorbox").innerHTML = "";
+                        })
+                        .catch(e => {
+                            document.getElementById("errorbox").innerHTML = e;
+                        })
+
+                    }
+
+                </script>
+            </div>
+        </div>
+    </body>
+</HTML>
+
