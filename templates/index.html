@@ -9,15 +9,15 @@
             integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
         <!-- Project Title! -->
-        <title>Title</title>    
+        <title>My QR</title>    
     </head>
     <body>
         <div class = "container">
             <div class="jumbotron mt-3">
                  <!-- Proejct Title -->
-                <h1>Project Title</h1>
+                <h1>My QR</h1>
                 <!-- Github link and Ainize link -->
-                <A>Git Hub repository : </A> <A href=""> </A>
+                <A>Git Hub repository : </A> <A href="https://github.com/woomurf/qrcode">https://github.com/woomurf/qrcode</A>
                 <br>
                 <A>Testing API : </A> <A href=""> on Ainize </A>
 
@@ -42,7 +42,7 @@
                 <!-- onclick function if you want you can delete this -->
                 <script>
                     document.getElementById("submit").onclick = () => {
-                        var url = document.getElementById("url")
+                        var url = document.getElementById("url").value;
                         var imagefile = document.getElementById("input1").files[0]
                         
                         var formData = new FormData();
@@ -64,13 +64,8 @@
                                 throw Error(response)
                             }
                         })
-                        .then(response => response.text())
-                        .then(response => {
-                            console.log(response);
-                            return response;
-                            
-                        })
-                        .then(response => btoa(response))
+                        .then(response => response.blob())
+                        .then(blob => URL.createObjectURL(blob))
                         .then(imageURL =>{
                             document.getElementById("resultImage").src = imageURL;
                             document.getElementById("errorbox").innerHTML = "";
@@ -80,6 +75,8 @@
                         })
 
                     }
+
+                    
 
                 </script>
             </div>
