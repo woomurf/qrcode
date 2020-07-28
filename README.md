@@ -1,3 +1,8 @@
+[![Run on Ainize](https://ainize.ai/static/images/run_on_ainize_button.svg)](https://ainize.web.app/redirect?git_repo=github.com/woomurf/qrcode)
+You can test project on this API & [Web Server](https://myqr-woomurf.endpoint.ainize.ai/)
+
+---
+
 # QR-Code
 [*转到中文版*](https://github.com/sylnsfar/qrcode/blob/master/README-cn.md)
 
