@@ -7,9 +7,35 @@
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
             integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        
+        <style>
+            #loader {
+                z-index: 1;
+                width: 40px;
+                height: 40px;
+                /* margin: 30px 0px 0px 50px; */
+                border-top:20px;
+                border: 6px solid #f3f3f3;
+                border-radius: 50%;
+                border-top: 6px solid #3498db;
+                vertical-align:middle;
+                -webkit-animation: spin 3s linear infinite;
+                animation: spin 2s linear infinite;
+                }
+
+            @-webkit-keyframes spin {
+            0% { -webkit-transform: rotate(0deg); }
+            100% { -webkit-transform: rotate(360deg); }
+            }
+
+            @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+            }
+        </style>
 
         <!-- Project Title! -->
-        <title>My QR</title>    
+        <title>My QR</title>
     </head>
     <body>
         <div class = "container">
@@ -19,11 +45,16 @@
                 <!-- Github link and Ainize link -->
                 <A>Git Hub repository : </A> <A href="https://github.com/woomurf/qrcode">https://github.com/woomurf/qrcode</A>
                 <br>
-                <A>Testing API : </A> <A href=""> on Ainize </A>
+                <A>Testing API : </A> <A href="https://ainize.ai/woomurf/myqr"> on Ainize </A>
 
                 <hr class="solid">
                 
                 <!-- If your project have a input files -->
+                <h2>Example</h2>
+                <div id="example">
+                    <img src="https://raw.githubusercontent.com/woomurf/qrcode/master/example/example_source.gif" width="300px">
+                    <img src="https://raw.githubusercontent.com/woomurf/qrcode/master/example/example_result.gif" width="300px">
+                </div>
                 <h2>Upload </h2>
                 <div id = 'inputImage'>
                     <label> url : </label>
@@ -31,19 +62,27 @@
                     <label for="label1">Image or Gif : </label>
                     <input type = 'file' id = 'input1' style="margin-right: 10px; margin-bottom: 10px;">
                     <button id = "submit" type='submit' class="btn btn-primary btn-lg" style="margin-left: auto;"> submit </button>
+                    <div id = "loader" style="display: none;"></div><br>
                 </div>
                 
                 <!-- Result Box -->
                 <div id ='resultBox' style="margin-left: auto; margin-right: auto;">
-                    <p id='errorbox'></p>
+                    <p id="statusbox"></p>
                     <img id='resultImage' src="" alt="">
                 </div>
 
                 <!-- onclick function if you want you can delete this -->
                 <script>
                     document.getElementById("submit").onclick = () => {
+                        waiting();
                         var url = document.getElementById("url").value;
                         var imagefile = document.getElementById("input1").files[0]
+
+                        if(url.length < 1){
+                            stopWaiting();
+                            document.getElementById("statusbox").innerHTML = "Please input url";
+                            return null;
+                        }
                         
                         var formData = new FormData();
                         formData.append("url", url);
@@ -68,12 +107,25 @@
                         .then(blob => URL.createObjectURL(blob))
                         .then(imageURL =>{
                             document.getElementById("resultImage").src = imageURL;
-                            document.getElementById("errorbox").innerHTML = "";
+                            document.getElementById("statusbox").innerHTML = "";
+                            stopWaiting();
                         })
                         .catch(e => {
-                            document.getElementById("errorbox").innerHTML = e;
+                            document.getElementById("statusbox").innerHTML = e;
+                            stopWaiting();
                         })
 
+                    }
+
+                    function waiting(){
+                        var spining = document.getElementById("loader");
+                        spining.style.display = 'inline-block';
+
+                    }
+
+                    function stopWaiting(){
+                        var spining = document.getElementById("loader");
+                        spining.style.display = "none";
                     }
 
                     
