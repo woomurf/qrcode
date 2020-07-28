@@ -1,0 +1,56 @@
+openapi: 3.0.0
+
+info:
+  title: My QR
+  description: | 
+    My QR project is make QR code using your input image or gif.
+
+    You can test My QR in API or **[Web Server](https://myqr-woomurf.endpoint.ainize.ai/)**.
+    
+    ---
+    
+      How to use:
+      * Input your url.
+      * Input QR code image or gif.
+      * Execute and wait little time.
+
+  version: 2.3.1
+  license: 
+    name: "GPL-3.0 License"
+
+servers:
+  - url: https://myqr-woomurf.endpoint.ainize.ai/
+  
+paths:
+  /qr:
+    post:
+      requestBody:
+        required: true
+        description: | 
+            Input url and Image. You can get QR code combined your image about url.
+            
+            [sample Image](https://raw.githubusercontent.com/woomurf/qrcode/master/example/example_source.gif)
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                url:
+                  type: string
+                image:
+                  type: string
+                  format: binary
+      
+      responses:
+        '200':
+          description: success
+          content:
+            images/*:
+              schema:
+                type: string
+                format: binary
+        '400':
+          description: Bad Request
+        
+        '500':
+          description: Server side error
