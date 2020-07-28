@@ -14,10 +14,12 @@ def generateQRcode():
     url = request.form['url']
     if 'image' in request.files: 
         image = Image.open(request.files['image'].stream)
+        format_ = image.format
     else:
         image = None
+        format_ = "PNG"
 
-    format_ = image.format
+
     version, level, qr = myqr.run(
         url,
         version=1,
@@ -33,6 +35,10 @@ def generateQRcode():
     qr.seek(0)
     
     return send_file(qr, mimetype='image/'+format_)
+
+@app.route("/healthz", methods=["GET"])
+def healthCheck():
+    return "ok", 200
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
