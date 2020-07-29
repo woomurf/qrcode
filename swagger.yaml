@@ -40,6 +40,14 @@ paths:
                 image:
                   type: string
                   format: binary
+                contrast:
+                  type: float
+                brightness:
+                  type: float
+                color:
+                  type: boolean
+              required:
+                - url
       
       responses:
         '200':

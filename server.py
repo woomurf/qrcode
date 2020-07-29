@@ -22,7 +22,7 @@ def handle_requests_by_batch():
                 continue
             batch_outputs = []
             for request in requests_batch:
-                batch_outputs.append(run(request['input'][0], request['input'][1], request['input'][2], request['input'][3]))
+                batch_outputs.append(run(request['input'][0], request['input'][1], request['input'][2], request['input'][3], request['input'][4]))
             
             for request, output in zip(requests_batch, batch_outputs):
                 request['output'] = output
@@ -34,19 +34,26 @@ def index():
     return render_template("index.html")
 
 @app.route("/qr", methods=["POST"])
-def generateQRcode():
+def generateQRcode():  
 
     if requests_queue.qsize() > BATCH_SIZE: 
         return jsonify({'error': 'Too Many Requests'}), 429
 
     url = request.form['url']
+    if 'color' in request.form:
+        color = True if request.form['color'] == "true" else False
+        print(color)
+
+    else:
+        color = True
+
     if 'contrast' in request.form: 
-        contrast = request.form['contrast']
+        contrast = float(request.form['contrast'])
     else:
         contrast = 1.0
     
     if 'brightness' in request.form:
-        brightness = request.form['brightness']
+        brightness = float(request.form['brightness'])
     else:
         brightness = 1.0
 
@@ -56,9 +63,9 @@ def generateQRcode():
     else:
         image = None
         format_ = "PNG"
-    
+
     req = {
-        'input': [url, image, contrast, brightness]
+        'input': [url, image, contrast, brightness, color]
     }
 
     requests_queue.put(req)
@@ -74,13 +81,13 @@ def generateQRcode():
 def healthCheck():
     return "ok", 200
 
-def run(url, image, contrast, brightness):
+def run(url, image, contrast, brightness, color):
     version, level, qr = myqr.run(
         url,
         version=1,
         level='H',
         picture=image,
-        colorized=True,
+        colorized=color,
         contrast=contrast,
         brightness=brightness,
         save_name= None,
@@ -92,4 +99,4 @@ def run(url, image, contrast, brightness):
     return qr
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=80, threaded=True)
+    app.run(host='0.0.0.0', port=80, threaded=False, debug=True)

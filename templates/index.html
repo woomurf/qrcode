@@ -8,6 +8,9 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
             integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         
+        <!-- JQuery -->
+        <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+        
         <style>
             #loader {
                 z-index: 1;
@@ -50,15 +53,14 @@
                 <h3>Notice</h3>
                 <ul>
                     <li>Time increases about URL length or image size.</li>
-                    <li>Image size increases about URL length</li>
+                    <li>Image size increases about URL length.</li>
                 </ul>
                 <hr class="solid">
                 
                 <!-- If your project have a input files -->
                 <h2>Example</h2>
                 <div id="example">
-                    <img src="https://raw.githubusercontent.com/woomurf/qrcode/master/example/example_source.gif" width="300px">
-                    <img src="https://raw.githubusercontent.com/woomurf/qrcode/master/example/example_result.gif" width="300px">
+                    <img src="https://raw.githubusercontent.com/woomurf/qrcode/master/example/zootopia_qrcode.gif" width="300px">
                 </div>
                 <h2>Upload </h2>
                 <div id = 'inputImage'>
@@ -68,6 +70,11 @@
                     <input type = "text" id="contrast" style="width:10%" value="1.0"></input><br>
                     <label> brightness : </label>
                     <input type = "text" id="brightness" style="width:10%" value="1.0"></input><br>
+                    <label> color : </label>
+                    <input type = "radio" name = "color" value="True" checked="checked"></input>
+                    <label> True </label>
+                    <input type = "radio" name = "color" value="False"></input>
+                    <label> False </label><br>
                     <label for="label1">Image or Gif : </label>
                     <input type = 'file' id = 'input1' style="margin-right: 10px; margin-bottom: 10px;">
                     <button id = "submit" type='submit' class="btn btn-primary btn-lg" style="margin-left: auto;"> submit </button>
@@ -88,7 +95,7 @@
                         var imagefile = document.getElementById("input1").files[0]
                         var contrast = document.getElementById("contrast").value;
                         var brightness = document.getElementById("brightness").value;
-
+                        var color = $("input:radio[name='color']:checked").val();
                         var statusbox = document.getElementById("statusbox");
                         
                         if(isNumeric(contrast)){
@@ -114,12 +121,22 @@
                             statusbox.innerHTML = "Please input url.";
                             return null;
                         }
+
+                        if(color == "True"){
+                            color = true;
+                        }
+                        else{
+                            color = false;
+                        }
+
+
                         
                         var formData = new FormData();
                         formData.append("url", url);
                         formData.append("image", imagefile);
                         formData.append("contrast", contrast);
                         formData.append("brightness", brightness);
+                        formData.append("color", color);
 
                         fetch(
                             "/qr",
@@ -132,8 +149,9 @@
                             if(response.status == 200){
                                 return response
                             }
-                            else{
-                                throw Error(response)
+                            else if (response.status==429){
+
+                                throw Error("Too Many Requests. Submit data later.")
                             }
                         })
                         .then(response => response.blob())
