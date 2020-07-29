@@ -46,7 +46,12 @@
                 <A>Git Hub repository : </A> <A href="https://github.com/woomurf/qrcode">https://github.com/woomurf/qrcode</A>
                 <br>
                 <A>Testing API : </A> <A href="https://ainize.ai/woomurf/myqr"> on Ainize </A>
-
+                <br><br>
+                <h3>Notice</h3>
+                <ul>
+                    <li>Time increases about URL length or image size.</li>
+                    <li>Image size increases about URL length</li>
+                </ul>
                 <hr class="solid">
                 
                 <!-- If your project have a input files -->
@@ -59,6 +64,10 @@
                 <div id = 'inputImage'>
                     <label> url : </label>
                     <input type = "text" id="url" style="width:40%"></input><br>
+                    <label> contrast : </label>
+                    <input type = "text" id="contrast" style="width:10%" value="1.0"></input><br>
+                    <label> brightness : </label>
+                    <input type = "text" id="brightness" style="width:10%" value="1.0"></input><br>
                     <label for="label1">Image or Gif : </label>
                     <input type = 'file' id = 'input1' style="margin-right: 10px; margin-bottom: 10px;">
                     <button id = "submit" type='submit' class="btn btn-primary btn-lg" style="margin-left: auto;"> submit </button>
@@ -77,16 +86,40 @@
                         waiting();
                         var url = document.getElementById("url").value;
                         var imagefile = document.getElementById("input1").files[0]
+                        var contrast = document.getElementById("contrast").value;
+                        var brightness = document.getElementById("brightness").value;
+
+                        var statusbox = document.getElementById("statusbox");
+                        
+                        if(isNumeric(contrast)){
+                            contrast = parseFloat(contrast)
+                        }
+                        else{
+                            stopWaiting();
+                            statusbox.innerHTML = "Please input correct contrast value.";
+                            return null;
+                        }
+
+                        if(isNumeric(brightness)){
+                            brightness = parseFloat(brightness)
+                        }
+                        else{
+                            stopWaiting();
+                            statusbox.innerHTML = "Please input correct brightness value.";
+                            return null;
+                        }
 
                         if(url.length < 1){
                             stopWaiting();
-                            document.getElementById("statusbox").innerHTML = "Please input url";
+                            statusbox.innerHTML = "Please input url.";
                             return null;
                         }
                         
                         var formData = new FormData();
                         formData.append("url", url);
                         formData.append("image", imagefile);
+                        formData.append("contrast", contrast);
+                        formData.append("brightness", brightness);
 
                         fetch(
                             "/qr",
@@ -107,11 +140,11 @@
                         .then(blob => URL.createObjectURL(blob))
                         .then(imageURL =>{
                             document.getElementById("resultImage").src = imageURL;
-                            document.getElementById("statusbox").innerHTML = "";
+                            statusbox.innerHTML = "";
                             stopWaiting();
                         })
                         .catch(e => {
-                            document.getElementById("statusbox").innerHTML = e;
+                            statusbox.innerHTML = e;
                             stopWaiting();
                         })
 
@@ -128,6 +161,18 @@
                         spining.style.display = "none";
                     }
 
+                    function isNumeric(num){
+                        num = String(num).replace(/^\s+|\s+$/g, "");
+                        var regex = /^[0-9]+(\.[0-9]+)?$/g;
+
+                        if( regex.test(num) ){
+                            num = num.replace(/,/g, "");
+                            return isNaN(num) ? false : true;
+                        }
+                        else{ 
+                            return false;  
+                        }
+                    }
                     
 
                 </script>

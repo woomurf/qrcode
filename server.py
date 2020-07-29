@@ -22,7 +22,7 @@ def handle_requests_by_batch():
                 continue
             batch_outputs = []
             for request in requests_batch:
-                batch_outputs.append(run(request['input'][0], request['input'][1]))
+                batch_outputs.append(run(request['input'][0], request['input'][1], request['input'][2], request['input'][3]))
             
             for request, output in zip(requests_batch, batch_outputs):
                 request['output'] = output
@@ -40,6 +40,16 @@ def generateQRcode():
         return jsonify({'error': 'Too Many Requests'}), 429
 
     url = request.form['url']
+    if 'contrast' in request.form: 
+        contrast = request.form['contrast']
+    else:
+        contrast = 1.0
+    
+    if 'brightness' in request.form:
+        brightness = request.form['brightness']
+    else:
+        brightness = 1.0
+
     if 'image' in request.files: 
         image = Image.open(request.files['image'].stream)
         format_ = image.format
@@ -48,7 +58,7 @@ def generateQRcode():
         format_ = "PNG"
     
     req = {
-        'input': [url, image]
+        'input': [url, image, contrast, brightness]
     }
 
     requests_queue.put(req)
@@ -64,15 +74,15 @@ def generateQRcode():
 def healthCheck():
     return "ok", 200
 
-def run(url, image):
+def run(url, image, contrast, brightness):
     version, level, qr = myqr.run(
         url,
         version=1,
         level='H',
         picture=image,
         colorized=True,
-        contrast=1.0,
-        brightness=1.0,
+        contrast=contrast,
+        brightness=brightness,
         save_name= None,
         save_dir=os.getcwd()
         )
