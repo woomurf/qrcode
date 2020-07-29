@@ -10,7 +10,6 @@ app = Flask(__name__, template_folder='./templates/')
 
 requests_queue = Queue()
 BATCH_SIZE = 1
-REQUEST_LIMIT = 5
 CHECK_INTERVAL = 0.1
 
 def handle_requests_by_batch():
@@ -37,7 +36,7 @@ def index():
 @app.route("/qr", methods=["POST"])
 def generateQRcode():
 
-    if requests_queue.qsize() > REQUEST_LIMIT: 
+    if requests_queue.qsize() > BATCH_SIZE: 
         return jsonify({'error': 'Too Many Requests'}), 429
 
     url = request.form['url']
@@ -83,4 +82,4 @@ def run(url, image):
     return qr
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=80)
+    app.run(host='0.0.0.0', port=80, threaded=True)
