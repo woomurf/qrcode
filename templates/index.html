@@ -149,9 +149,10 @@
                             if(response.status == 200){
                                 return response
                             }
-                            else if (response.status==429){
-
-                                throw Error("Too Many Requests. Submit data later.")
+                            else {
+                                response.json().then(msg => statusbox.innerHTML=msg['error'])
+                                document.getElementById("resultImage").src = ""
+                                throw Error("")
                             }
                         })
                         .then(response => response.blob())
@@ -162,7 +163,7 @@
                             stopWaiting();
                         })
                         .catch(e => {
-                            statusbox.innerHTML = e;
+                            // statusbox.innerHTML = e;
                             stopWaiting();
                         })
 

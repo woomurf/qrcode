@@ -10,6 +10,7 @@ app = Flask(__name__, template_folder='./templates/')
 
 requests_queue = Queue()
 BATCH_SIZE = 1
+REQUEST_LIMIT = 5
 CHECK_INTERVAL = 0.1
 
 def handle_requests_by_batch():
@@ -20,12 +21,12 @@ def handle_requests_by_batch():
                 requests_batch.append(requests_queue.get(timeout=CHECK_INTERVAL))
             except Empty:
                 continue
-            batch_outputs = []
+
             for request in requests_batch:
-                batch_outputs.append(run(request['input'][0], request['input'][1], request['input'][2], request['input'][3], request['input'][4]))
-            
-            for request, output in zip(requests_batch, batch_outputs):
-                request['output'] = output
+                request['output'] = run(request['input'][0], request['input'][1], request['input'][2], request['input'][3], request['input'][4])
+
+            # for request, output in zip(requests_batch, batch_outputs):
+            #     request['output'] = output
 
 threading.Thread(target=handle_requests_by_batch).start()
 
@@ -36,14 +37,13 @@ def index():
 @app.route("/qr", methods=["POST"])
 def generateQRcode():  
 
-    if requests_queue.qsize() > BATCH_SIZE: 
+    if requests_queue.qsize() > REQUEST_LIMIT: 
         return jsonify({'error': 'Too Many Requests'}), 429
 
     url = request.form['url']
+
     if 'color' in request.form:
         color = True if request.form['color'] == "true" else False
-        print(color)
-
     else:
         color = True
 
@@ -63,6 +63,10 @@ def generateQRcode():
     else:
         image = None
         format_ = "PNG"
+    
+
+    if format_ == "GIF" and len(url)*image.n_frames > 500:
+        return jsonify({'error': 'URL is too long or GIF file is too big'}), 400
 
     req = {
         'input': [url, image, contrast, brightness, color]
@@ -99,4 +103,4 @@ def run(url, image, contrast, brightness, color):
     return qr
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=80, threaded=False, debug=True)
+    app.run(host='0.0.0.0', port=80, threaded=True)

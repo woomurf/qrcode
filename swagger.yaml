@@ -41,9 +41,11 @@ paths:
                   type: string
                   format: binary
                 contrast:
-                  type: float
+                  type: integer
+                  default: 1.0
                 brightness:
-                  type: float
+                  type: integer
+                  default: 1.0
                 color:
                   type: boolean
               required:
@@ -59,6 +61,9 @@ paths:
                 format: binary
         '400':
           description: Bad Request
+        
+        '429':
+          description: Too Many Requests
         
         '500':
           description: Server side error
