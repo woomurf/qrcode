@@ -34,7 +34,7 @@ threading.Thread(target=handle_requests_by_batch).start()
 def index():
     return render_template("index.html")
 
-@app.route("/qr", methods=["POST"])
+@app.route("/create-qr-code", methods=["POST"])
 def generateQRcode():  
 
     if requests_queue.qsize() > REQUEST_LIMIT: 
@@ -66,6 +66,7 @@ def generateQRcode():
     
 
     if format_ == "GIF" and len(url)*image.n_frames > 500:
+        print(image.n_frames)
         return jsonify({'error': 'URL is too long or GIF file is too big'}), 400
 
     req = {

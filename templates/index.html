@@ -53,29 +53,35 @@
                 <h3>Notice</h3>
                 <ul>
                     <li>Time increases about URL length or image size.</li>
-                    <li>Image size increases about URL length.</li>
+                    <li>QRcode image size increases about URL length.</li>
                 </ul>
                 <hr class="solid">
                 
                 <!-- If your project have a input files -->
                 <h2>Example</h2>
                 <div id="example">
-                    <img src="https://raw.githubusercontent.com/woomurf/qrcode/master/example/zootopia_qrcode.gif" width="300px">
+                    <img src="https://raw.githubusercontent.com/woomurf/qrcode/master/example/sample.gif" width="300px">
+                    <img src="https://raw.githubusercontent.com/woomurf/qrcode/master/example/example.gif" width="300px">
                 </div>
                 <h2>Upload </h2>
+                <ul>
+                    <li>URL : Input url you want to create with QR code.</li>
+                    <li>Image : Input image you want to combine with QR code.</li>
+                    <li>Contrast / Brightness / Color : Options for QR code image.</li>
+                </ul>
                 <div id = 'inputImage'>
-                    <label> url : </label>
+                    <label> URL : </label>
                     <input type = "text" id="url" style="width:40%"></input><br>
-                    <label> contrast : </label>
+                    <label> Contrast (0~)  : </label>
                     <input type = "text" id="contrast" style="width:10%" value="1.0"></input><br>
-                    <label> brightness : </label>
+                    <label> Brightness (0~) : </label>
                     <input type = "text" id="brightness" style="width:10%" value="1.0"></input><br>
-                    <label> color : </label>
+                    <label> Color : </label>
                     <input type = "radio" name = "color" value="True" checked="checked"></input>
                     <label> True </label>
                     <input type = "radio" name = "color" value="False"></input>
                     <label> False </label><br>
-                    <label for="label1">Image or Gif : </label>
+                    <label for="label1">Image or GIF : </label>
                     <input type = 'file' id = 'input1' style="margin-right: 10px; margin-bottom: 10px;">
                     <button id = "submit" type='submit' class="btn btn-primary btn-lg" style="margin-left: auto;"> submit </button>
                     <div id = "loader" style="display: none;"></div><br>
@@ -139,7 +145,7 @@
                         formData.append("color", color);
 
                         fetch(
-                            "/qr",
+                            "/create-qr-code",
                             {
                                 method: "POST",
                                 body: formData
