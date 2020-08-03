@@ -22,14 +22,16 @@ servers:
   - url: https://myqr-woomurf.endpoint.ainize.ai/
   
 paths:
-  /qr:
+  /create-qr-code:
     post:
       requestBody:
         required: true
         description: | 
-            Input url and Image. You can get QR code combined your image about url.
+            Input url and Image. You can get QR code that combined your image and url.
+
+            contrast / brightness / color is option for result QR code. 
             
-            [sample Image](https://raw.githubusercontent.com/woomurf/qrcode/master/example/example_source.gif)
+            [sample Image](https://raw.githubusercontent.com/woomurf/qrcode/master/example/sample.gif)
         content:
           multipart/form-data:
             schema:
@@ -48,6 +50,7 @@ paths:
                   default: 1.0
                 color:
                   type: boolean
+                  default: true
               required:
                 - url
       
