@@ -1,4 +1,4 @@
-[![Run on Ainize](https://ainize.ai/static/images/run_on_ainize_button.svg)](https://ainize.web.app/redirect?git_repo=github.com/woomurf/qrcode)
+[![Run on Ainize](https://ainize.ai/static/images/run_on_ainize_button.svg)](https://ainize.web.app/redirect?git_repo=https://github.com/woomurf/qrcode)
 
 You can test project on this API & [Web Server](https://myqr-woomurf.endpoint.ainize.ai/)
 
@@ -15,7 +15,6 @@ You can test project on this API & [Web Server](https://myqr-woomurf.endpoint.ai
 
   * 160911: updated to be importable
 
-  ​
 
 ## Overview
 
@@ -24,7 +23,6 @@ You can test project on this API & [Web Server](https://myqr-woomurf.endpoint.ai
 
 Generate *common qr-code*,  *artistic qr-code (black & white or colorized)*,  *animated qr-code (black & white or colorized)*.
 
-​     
 
 ## Contents
 
@@ -42,19 +40,18 @@ Generate *common qr-code*,  *artistic qr-code (black & white or colorized)*,  *a
 * [License](#license)
 
 
-​
 
 ## Examples
 
-![](https://github.com/sylnsfar/qrcode/blob/master/example/qrs0.jpg)
+![](https://raw.githubusercontent.com/sylnsfar/qrcode/master/example/qrs0.jpg)
 
-![](https://github.com/sylnsfar/qrcode/blob/master/example/qrs1.jpg)
+![](https://raw.githubusercontent.com/sylnsfar/qrcode/master/example/qrs1.jpg)
 
-![](https://github.com/sylnsfar/qrcode/blob/master/example/qrs2.jpg)
+![](https://raw.githubusercontent.com/sylnsfar/qrcode/master/example/qrs2.jpg)
 
-![](https://github.com/sylnsfar/qrcode/blob/master/example/c_qrcode.gif)![](https://github.com/sylnsfar/qrcode/blob/master/example/daftpunktocat-guy_qrcode.gif)
+![](https://raw.githubusercontent.com/sylnsfar/qrcode/master/example/c_qrcode.gif)![](https://raw.githubusercontent.com/sylnsfar/qrcode/master/example/daftpunktocat-guy_qrcode.gif)
 
-![](https://github.com/sylnsfar/qrcode/blob/master/example/zootopia_qrcode.gif)![](https://github.com/sylnsfar/qrcode/blob/master/example/daftpunktocat-guy_qrcode0.gif)
+![](https://raw.githubusercontent.com/sylnsfar/qrcode/master/example/zootopia_qrcode.gif)![](https://raw.githubusercontent.com/sylnsfar/qrcode/master/example/daftpunktocat-guy_qrcode0.gif)
 
   
 
@@ -95,12 +92,11 @@ myqr 	Words
 - see [Animated GIF QR-Code](#animated-gif-qr-code) about GIF
 
 
-​    
 
 
 #### Common QR-Code
 
-![](https://github.com/sylnsfar/qrcode/blob/master/example/0.png)
+![](https://raw.githubusercontent.com/sylnsfar/qrcode/master/example/0.png)
 
 ```markdown
 #1 Words
@@ -109,7 +105,7 @@ myqr https://github.com
 
 * Just input a URL or a sentence, then get your QR-Code named 'qrcode.png' in the current directory.
 
-  ​
+
 
 ```markdown
 #2 -v, -l
@@ -136,7 +132,7 @@ myqr https://github.com   -n github_qr.jpg   -d .../paths/
 
 * **Customize**: You can name the output-file and decide the output-directory. **Notice** that if the name is as same as a existing file, the old one will be deleted.
 
-  `-n` representing the output-filename could be in the format one of `.jpg`， `.png` ，`.bmp` ，`.gif` .
+  `-n` representing the output-filename could be in the format one of `.jpg`, `.png`, `.bmp`, `.gif` .
 
   `-d` means directory.
 
@@ -147,7 +143,7 @@ myqr https://github.com   -n github_qr.jpg   -d .../paths/
 
 #### Artistic QR-Code
 
-![](https://github.com/sylnsfar/qrcode/blob/master/example/1.png)![](https://github.com/sylnsfar/qrcode/blob/master/example/2.png)
+![](https://raw.githubusercontent.com/sylnsfar/qrcode/master/example/1.png)![](https://raw.githubusercontent.com/sylnsfar/qrcode/master/example/2.png)
 
 
 ```markdown
@@ -168,7 +164,6 @@ myqr https://github.com -p github.jpg -c
 
 * The `-c` is to make the resulting picture **colorized**.
 
-  ​
 
 
 
@@ -187,7 +182,7 @@ myqr https://github.com -p github.jpg [-c] -con 1.5 -bri 1.6
 
 #### Animated GIF QR-Code
 
-![](https://github.com/sylnsfar/qrcode/blob/master/example/daftpunktocat-guy_qrcode.gif)![](https://github.com/sylnsfar/qrcode/blob/master/example/daftpunktocat-guy_qrcode0.gif)
+![](https://raw.githubusercontent.com/sylnsfar/qrcode/master/example/daftpunktocat-guy_qrcode.gif)![](https://raw.githubusercontent.com/sylnsfar/qrcode/master/example/daftpunktocat-guy_qrcode0.gif)
 
 The only difference from Artistic QR-Code mentioned above is that you should input an image file in the `.gif` format. The you can get your black-and-white or colorful qr-code. Remember that when you use `-n` to customize the output-filename, then the output-filename must end by `.gif`.
 
@@ -244,9 +239,9 @@ Optional parameters
 
 * If the size of the picture is large, you should also choose a **rightly** large `-v` instead of using the default one.
 
-* If part of the picture is transparent, the qr code will look like: ![](https://github.com/sylnsfar/qrcode/blob/master/example/aa.png)
+* If part of the picture is transparent, the qr code will look like: ![](https://raw.githubusercontent.com/sylnsfar/qrcode/master/example/aa.png)
 
-  You can change the transparent layer to white, and then it will look like: ![](https://github.com/sylnsfar/qrcode/blob/master/example/a0.png)
+  You can change the transparent layer to white, and then it will look like: ![](https://raw.githubusercontent.com/sylnsfar/qrcode/master/example/a0.png)
 
 
 
@@ -287,7 +282,6 @@ Optional parameters
 * Mac, Python 3
 
 
-​    
 
 
 ## License 
