@@ -1,4 +1,4 @@
-[![Run on Ainize](https://ainize.ai/static/images/run_on_ainize_button.svg)](https://ainize.web.app/redirect?git_repo=github.com/woomurf/qrcode)
+[![Run on Ainize](https://ainize.ai/static/images/run_on_ainize_button.svg)](https://ainize.web.app/redirect?git_repo=https://github.com/woomurf/qrcode)
 
 You can test project on this API & [Web Server](https://myqr-woomurf.endpoint.ainize.ai/)
 
@@ -15,7 +15,6 @@ You can test project on this API & [Web Server](https://myqr-woomurf.endpoint.ai
 
   * 160911: updated to be importable
 
-  ​
 
 ## Overview
 
@@ -24,7 +23,6 @@ You can test project on this API & [Web Server](https://myqr-woomurf.endpoint.ai
 
 Generate *common qr-code*,  *artistic qr-code (black & white or colorized)*,  *animated qr-code (black & white or colorized)*.
 
-​     
 
 ## Contents
 
@@ -42,7 +40,6 @@ Generate *common qr-code*,  *artistic qr-code (black & white or colorized)*,  *a
 * [License](#license)
 
 
-​
 
 ## Examples
 
@@ -95,7 +92,6 @@ myqr 	Words
 - see [Animated GIF QR-Code](#animated-gif-qr-code) about GIF
 
 
-​    
 
 
 #### Common QR-Code
@@ -109,7 +105,7 @@ myqr https://github.com
 
 * Just input a URL or a sentence, then get your QR-Code named 'qrcode.png' in the current directory.
 
-  ​
+
 
 ```markdown
 #2 -v, -l
@@ -136,7 +132,7 @@ myqr https://github.com   -n github_qr.jpg   -d .../paths/
 
 * **Customize**: You can name the output-file and decide the output-directory. **Notice** that if the name is as same as a existing file, the old one will be deleted.
 
-  `-n` representing the output-filename could be in the format one of `.jpg`， `.png` ，`.bmp` ，`.gif` .
+  `-n` representing the output-filename could be in the format one of `.jpg`, `.png`, `.bmp`, `.gif` .
 
   `-d` means directory.
 
@@ -168,7 +164,6 @@ myqr https://github.com -p github.jpg -c
 
 * The `-c` is to make the resulting picture **colorized**.
 
-  ​
 
 
 
@@ -287,7 +282,6 @@ Optional parameters
 * Mac, Python 3
 
 
-​    
 
 
 ## License 
