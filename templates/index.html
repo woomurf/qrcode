@@ -46,14 +46,15 @@
                  <!-- Proejct Title -->
                 <h1>My QR</h1>
                 <!-- Github link and Ainize link -->
-                <A>Git Hub repository : </A> <A href="https://github.com/woomurf/qrcode">https://github.com/woomurf/qrcode</A>
+                <A>GitHub Repo: </A> <A href="https://github.com/woomurf/qrcode">https://github.com/woomurf/qrcode</A>
                 <br>
-                <A>Testing API : </A> <A href="https://ainize.ai/woomurf/myqr"> on Ainize </A>
+                <A>Open API : </A> <A href="https://ainize.ai/woomurf/qrcode"> on Ainize </A>
                 <br><br>
-                <h3>Notice</h3>
+                <h3>Tips</h3>
                 <ul>
-                    <li>Time increases about URL length or image size.</li>
-                    <li>QRcode image size increases about URL length.</li>
+                    <li>It takes longer to get the QR code if the image size you added is large, or the URL length you entered is long.</li>
+                    <li>The size of the QR code varies by URL length.</li>
+                    <li> Use a nearly square picture instead of rectangle one.</li>
                 </ul>
                 <hr class="solid">
                 
@@ -63,12 +64,16 @@
                     <img src="https://raw.githubusercontent.com/woomurf/qrcode/master/example/sample.gif" width="300px">
                     <img src="https://raw.githubusercontent.com/woomurf/qrcode/master/example/example.gif" width="300px">
                 </div>
-                <h2>Upload </h2>
-                <ul>
-                    <li>URL : Input url you want to create with QR code.</li>
-                    <li>Image : Input image you want to combine with QR code.</li>
-                    <li>Contrast / Brightness / Color : Options for QR code image.</li>
-                </ul>
+                <br>
+                <h2>How to create</h2>
+                <ol>
+                    <li>Enter the URL you want to open with QR code.</li>
+                    <li>Set Contrast and Brightness.</li>
+                    <li>Choose between color(True) or monochrome(False) for the result of QR code.</li>
+                    <li>Add an image you want to combine with QR code.</li>
+                </ol>
+                <h2>Let's Create!</h2>
+                
                 <div id = 'inputImage'>
                     <label> URL : </label>
                     <input type = "text" id="url" style="width:40%"></input><br>

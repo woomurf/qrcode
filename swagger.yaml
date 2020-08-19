@@ -5,14 +5,15 @@ info:
   description: | 
     My QR project is make QR code using your input image or gif.
 
-    You can test My QR in API or **[Web Server](https://myqr-woomurf.endpoint.ainize.ai/)**.
+    You can test My QR in open api or **[Web Server](https://master-qrcode-woomurf.endpoint.ainize.ai)**.
     
     ---
     
       How to use:
-      * Input your url.
-      * Input QR code image or gif.
-      * Execute and wait little time.
+      * Enter the URL you want to open with QR code.
+      * Set Contrast and Brightness.
+      * Choose the one between color(True) or monochrome(False) for your QR code.
+      * Add an image you want to combine with QR code.
 
   version: 2.3.1
   license: 
@@ -27,9 +28,8 @@ paths:
       requestBody:
         required: true
         description: | 
-            Input url and Image. You can get QR code that combined your image and url.
-
-            contrast / brightness / color is option for result QR code. 
+            Enter the URL and image you want. 
+            Choose contrast, brightness and color that is option for QR code image. 
             
             [sample Image](https://raw.githubusercontent.com/woomurf/qrcode/master/example/sample.gif)
         content:
